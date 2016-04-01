@@ -46,19 +46,19 @@ train_data <-cbind(train_data,train_subject,train_activity)
 Complete_data = merge(test_data,train_data,all=TRUE)
 
 # Get the names of the features. We need to add "subject" and "activity" at the end
-dsnames <- c(features$V2,"subject","activity")
+dsnames <- c(as.character(features$V2),"subject","activity")
 setnames(Complete_data,names(Complete_data),dsnames)
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 # -----------------------------------------------------------------------
 
 # Lets find the indecees of the columns with measurements refering to the "mean" and "std"
-mean_std_ind <- grep("(.*)mean(.*)|(.*)std(.*)", dsnames)
-Complete_data <- Complete_data[mean_std_ind,]
+mean_std_ind <- grep("(.*)mean(.*)|(.*)std(.*)", dsnames),
+Complete_data <- Complete_data[mean_std_ind,],
 
-# 3 Uses descriptive activity names to name the activities in the data set
+# 3. Uses descriptive activity names to name the activities in the data set
 # -----------------------------------------------------------------------
-activityid <- read.table("activity_labels.txt")
+activityid <- read.table("activity_labels.txt"),
 Complete_data <- merge(Complete_data, activityid, by.x="activity", by.y="V1")
 setnames(Complete_data,"V2","activityid")
 
@@ -74,3 +74,5 @@ setnames(Complete_data,names(Complete_data),dsnames)
 # -----------------------------------------------------------------------
 dsnames2 <- names(Complete_data)[]
 Final_data <- aggregate(Complete_data[dsnames2], by=Complete_data[c("subject","activity")], FUN=mean)
+# To end, we write the file 
+write.table(Final_data,"Final_data.txt", row.name=FALSE)
