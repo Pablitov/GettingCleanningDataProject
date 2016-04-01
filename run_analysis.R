@@ -1,6 +1,6 @@
 
 # 0. Do a few things before starting
-
+# -----------------------------------------------------------------------
 library(data.table)
 library(dplyr)
 library(plyr)
@@ -29,8 +29,7 @@ names(test_subject) <- "subject"
 test_activity <- read.table(paste0(wd,"/test/y_test.txt"))
 names(test_activity) <- "activity"
 test_data <- cbind(test_data,test_subject,test_activity)
-### Now we can change the names of the test data to use them later in order 
-### to merge the two data sets
+# Now we can change the names of the test data to use them later in order to merge the two data sets
 
 # Load the subjects and activities, and then merge them to the test dataframe
 
@@ -53,12 +52,12 @@ setnames(Complete_data,names(Complete_data),dsnames)
 # -----------------------------------------------------------------------
 
 # Lets find the indecees of the columns with measurements refering to the "mean" and "std"
-mean_std_ind <- grep("(.*)mean(.*)|(.*)std(.*)", dsnames),
-Complete_data <- Complete_data[mean_std_ind,],
+mean_std_ind <- grep("(.*)mean(.*)|(.*)std(.*)", dsnames)
+Complete_data <- Complete_data[mean_std_ind,]
 
 # 3. Uses descriptive activity names to name the activities in the data set
 # -----------------------------------------------------------------------
-activityid <- read.table("activity_labels.txt"),
+activityid <- read.table("activity_labels.txt")
 Complete_data <- merge(Complete_data, activityid, by.x="activity", by.y="V1")
 setnames(Complete_data,"V2","activityid")
 
