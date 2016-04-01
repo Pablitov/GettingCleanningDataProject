@@ -1,7 +1,7 @@
 # GettingCleanningDataProject
 Peer Assignment of the Getting and Cleanning Data from the Data Science Course
 
-The script "GCD-project assingment.R" does the following instructions:
+The script "run_analysis.R" files executes the following R code:
 
 0. Load the used libraries and download the original dataset and information files
 1. Merges the training and the test sets to create one data set
