@@ -66,7 +66,6 @@ setnames(Complete_dataset,names(Complete_dataset),dsnames)
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 # -----------------------------------------------------------------------
 dsnames <- names(Complete_dataset)
-Final_data <- aggregate(Complete_dataset[dsnames], by=Complete_dataset[c("subject","activity")], FUN=mean)
-Final_data <-aggregate(. ~subject + activity, Complete_dataset, mean)
+Final_data <-aggregate(. ~subject + activityname, Complete_dataset, mean)
 # To end, we write the file 
 write.table(Final_data,"Tidydata.txt", row.name=FALSE)
